@@ -1,0 +1,69 @@
+DROP DATABASE IF EXISTS Practicum;
+CREATE DATABASE Practicum;
+USE Practicum;
+
+CREATE TABLE Account(
+	Username VARCHAR(50) NOT NULL,
+	Password VARCHAR(50) NOT NULL,
+	Email VARCHAR(100) NOT NULL,
+	Name VARCHAR(100) NOT NULL,
+	ContactNumber VARCHAR(20) NOT NULL,
+	PRIMARY KEY(Username)
+);
+
+CREATE TABLE Company(
+	Name VARCHAR(50) NOT NULL,
+	MailingAddress VARCHAR(100) NOT NULL,
+	PhoneNumber VARCHAR(20) NOT NULL,
+	PRIMARY KEY(Name)
+);
+
+CREATE TABLE Mentor_Account(
+	Username VARCHAR(50) NOT NULL,
+	Company VARCHAR(50) NOT NULL,
+	Title VARCHAR(50) NOT NULL,
+	Department VARCHAR(50) NOT NULL,
+	PRIMARY KEY(Username),
+	FOREIGN KEY(Username) REFERENCES Account(Username),
+	FOREIGN KEY(Company) REFERENCES Company(Name)
+);
+
+CREATE TABLE Student_Account(
+	Username VARCHAR(50) NOT NULL,
+	IDNumber INT(6) NOT NULL,
+	Mentor VARCHAR(50) NOT NULL,
+	Course VARCHAR(10) NOT NULL,
+	PRIMARY KEY(Username),
+	FOREIGN KEY(Username) REFERENCES Account(Username)
+	FOREIGN KEY(Mentor) REFERENCES Mentor(Username)
+);
+
+CREATE TABLE Faculty_Account(
+	Username VARCHAR(50) NOT NULL,
+	IDNumber INT(6) NOT NULL,
+	PRIMARY KEY(Username),
+	FOREIGN KEY(Username) REFERENCES Account(Username)
+);
+
+CREATE TABLE Form(
+	ID INT(5) AUTO_INCREMENT NOT NULL,
+	Name VARCHAR(100) NOT NULL,
+	PRIMARY KEY(ID)
+);
+
+CREATE TABLE Question(
+	ID INT(5) AUTO_INCREMENT NOT NULL,
+	FormID INT(5) NOT NULL,
+	QuestionType VARCHAR(20) NOT NULL,
+	Description VARCHAR(1000) NOT NULL,
+	PRIMARY KEY(ID)
+	FOREIGN KEY(FormID) REFERENCES Form(ID)
+);
+
+CREATE TABLE Answer(
+	QuestionID INT(5) NOT NULL,
+	FormID INT(5) NOT NULL,
+	PRIMARY KEY(QuestionID, FormID)
+	FOREIGN KEY(QuestionID) REFERENCES Question(ID)
+	FOREIGN KEY(FormID) REFERENCES Form(ID)
+);
