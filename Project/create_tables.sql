@@ -18,7 +18,7 @@ CREATE TABLE Company(
 	PRIMARY KEY(Name)
 );
 
-CREATE TABLE Mentor_Account(
+CREATE TABLE Account_Mentor(
 	Username VARCHAR(50) NOT NULL,
 	Company VARCHAR(50) NOT NULL,
 	Title VARCHAR(50) NOT NULL,
@@ -28,17 +28,17 @@ CREATE TABLE Mentor_Account(
 	FOREIGN KEY(Company) REFERENCES Company(Name)
 );
 
-CREATE TABLE Student_Account(
+CREATE TABLE Account_Student(
 	Username VARCHAR(50) NOT NULL,
 	IDNumber INT(6) NOT NULL,
 	Mentor VARCHAR(50) NOT NULL,
 	Course VARCHAR(10) NOT NULL,
 	PRIMARY KEY(Username),
 	FOREIGN KEY(Username) REFERENCES Account(Username),
-	FOREIGN KEY(Mentor) REFERENCES Mentor(Username)
+	FOREIGN KEY(Mentor) REFERENCES Account_Mentor(Username)
 );
 
-CREATE TABLE Faculty_Account(
+CREATE TABLE Account_Faculty(
 	Username VARCHAR(50) NOT NULL,
 	IDNumber INT(6) NOT NULL,
 	PRIMARY KEY(Username),
@@ -53,10 +53,10 @@ CREATE TABLE Form(
 
 CREATE TABLE FormInstance(
 	ID INT(6) AUTO_INCREMENT NOT NULL,
-	IDNumber INT(6) NOT NULL,
-	FormID INT(5) AUTO_INCREMENT NOT NULL,
+	Username VARCHAR(50) NOT NULL,
+	FormID INT(5) NOT NULL,
 	PRIMARY KEY(ID),
-	FOREIGN KEY(IDNumber) REFERENCES Student_Account(IDNumber),
+	FOREIGN KEY(Username) REFERENCES Account_Student(Username),
 	FOREIGN KEY(FormID) REFERENCES Form(ID)
 );
 
@@ -126,7 +126,7 @@ CREATE TABLE Element_RadioCluster(
 CREATE TABLE Element_RadioCluster_Section(
 	ID INT(6) AUTO_INCREMENT NOT NULL,
 	ElementID INT(6) NOT NULL,
-	HasButtons BOOLEAN() NOT NULL,
+	HasButtons BOOLEAN NOT NULL,
 	Text VARCHAR(200) NOT NULL,
 	PRIMARY KEY(ID),
 	FOREIGN KEY(ElementID) REFERENCES Element_RadioCluster(ID)
@@ -142,7 +142,7 @@ CREATE TABLE Element_RadioCluster_Header(
 
 CREATE TABLE Element_Table(
 	ID INT(6) NOT NULL,
-	HasRowText BOOLEAN() NOT NULL,
+	HasRowText BOOLEAN NOT NULL,
 	PRIMARY KEY(ID),
 	FOREIGN KEY(ID) REFERENCES Element(ID)
 );
