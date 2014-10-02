@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Create Form</title>
+<script type="text/javascript" src="elements.js"></script>
+</head>
+<body>
+<form id="form" name="form">
+<p id="elements">
+</p>
+<p id="newItem">
+<select id="newItemDropDown">
+<option value="plainText">Plain Text</option>
+<option value="field">Field</option>
+<option value="textArea">Text Area</option>
+<option value="dropDown">Drop Down</option>
+<option value="radioCluster">Radio Cluster</option>
+<option value="table1">Table with questions on rows</option>
+<option value="table2">Table with dynamic rows</option>
+</select>
+<input type="button" value="Add Item" onclick="addItem()">
+</p>
+</form>
+
+<script type="text/javascript">
+var elements = [];
+elements.push(new element_plainText(0, "FORM NAME", "\tThis form is blah blah"));
+var count = 1;
+refreshForm();
+
+function addItem(){
+	updateData();
+	
+	var type = document.getElementById("newItemDropDown").value;
+	if(type == "plainText"){
+		elements.push(new element_plainText(count++, "", "plain text"));
+	}else if(type == "field"){
+		elements.push(new element_field(count++, "", "blah blah"));
+	}else if(type == "textArea"){
+		elements.push(new element_textArea(count++, "", "blah blah"));
+	}else if(type == "dropDown"){
+		elements.push(new element_dropDown(count++, ""));
+	}else if(type == "radioCluster"){
+		elements.push(new element_radioCluster(count++, ""));
+	}else if(type == "table1"){
+		elements.push(new element_table(count++, "", true));
+	}else if(type == "table2"){
+		elements.push(new element_table(count++, "", false));
+	}
+	
+	refreshForm();
+}
+
+function updateData(){
+	var formelements = document.getElementById("form").elements;
+	for(i=0; i<elements.length; i++){
+		if(!elements[i]) continue;
+		var element = formelements[elements[i].getName()];
+		if(elements[i].type == "plainText"){
+		}else if(elements[i].type == "field"){
+			elements[i].text = element.value;
+		}else if(elements[i].type == "textArea"){
+			elements[i].text = element.value;
+		}else if(elements[i].type == "dropDown"){
+			for(j=0; j<elements[i].choices.length; j++){
+				element = formelements[elements[i].getChoiceName(j)];
+				elements[i].choices[j] = element.value;
+			}
+		}else if(elements[i].type == "radioCluster"){
+			for(j=0; j<elements[i].rows; j++){
+				element = formelements[elements[i].getRowName(j)];
+				elements[i].rowText[j] = element.value;
+			}
+			for(j=0; j<elements[i].cols; j++){
+				element = formelements[elements[i].getColName(j)];
+				elements[i].colText[j] = element.value;
+			}
+		}else if(elements[i].type == "table"){
+			for(j=0; j<elements[i].cols; j++){
+				element = formelements[elements[i].getColName(j)];
+				elements[i].colText[j] = element.value;
+			}
+			if(elements[i].hasRowText){
+				for(j=0; j<elements[i].rows; j++){
+					element = formelements[elements[i].getRowName(j)];
+					elements[i].rowText[j] = element.value;
+				}
+			}
+		}
+	}
+}
+
+function refreshForm(){
+	var p = document.getElementById("elements");
+	var newHTML = [];
+	console.log(elements.length);
+	for(x=0; x<elements.length; x++){
+		if(!elements[x]) continue;
+		newHTML.push(elements[x].displayCreating());
+		newHTML.push("<input type=\"button\" value=\"Delete Element\" onclick=\"removeElement("+x+")\">");
+		newHTML.push("<br>");
+	}
+	p.innerHTML = newHTML.join('');
+}
+
+function removeElement(id){
+	updateData();
+	delete elements[id];
+	refreshForm();
+}
+</script>
+
+</body>
+</html>
