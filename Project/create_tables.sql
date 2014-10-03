@@ -5,9 +5,10 @@ USE Practicum;
 CREATE TABLE Account(
 	Username VARCHAR(50) NOT NULL,
 	Password VARCHAR(50) NOT NULL,
-	Email VARCHAR(100) NOT NULL,
+	Email VARCHAR(100),
 	Name VARCHAR(100) NOT NULL,
-	ContactNumber VARCHAR(20) NOT NULL,
+	ContactNumber VARCHAR(20),
+	Type VARCHAR(20),
 	PRIMARY KEY(Username)
 );
 
@@ -31,7 +32,7 @@ CREATE TABLE Account_Mentor(
 CREATE TABLE Account_Student(
 	Username VARCHAR(50) NOT NULL,
 	IDNumber INT(6) NOT NULL,
-	Mentor VARCHAR(50) NOT NULL,
+	Mentor VARCHAR(50),
 	Course VARCHAR(10) NOT NULL,
 	PRIMARY KEY(Username),
 	FOREIGN KEY(Username) REFERENCES Account(Username),
