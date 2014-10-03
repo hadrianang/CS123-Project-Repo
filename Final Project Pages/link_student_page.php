@@ -8,6 +8,12 @@
 	$user = $_SESSION['uname']; 
 	echo "<div align = 'left'> Logged in as '$user' </div>";
 ?>
+<!--Home Page-->
+<div align = "right">
+<form action="home.php"> 
+<input type="submit" name="home" value="Home"> 
+</form>
+</div> 
 
 <!--Logout code-->
 <div align = "right">
@@ -15,6 +21,7 @@
 <input type="submit" name="logout" value="Log-out"> 
 </form>
 </div> 
+
 <h1>List of Practicum Students</h1>
 <?php
 	

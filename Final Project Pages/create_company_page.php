@@ -1,4 +1,5 @@
 <html>
+
 <?php 
 	//check if logged-in
 	$status = false; 
@@ -8,6 +9,12 @@
 	$user = $_SESSION['uname']; 
 	echo "<div align = 'left'> Logged in as '$user' </div>";
 ?>
+<!--Home Page-->
+<div align = "right">
+<form action="home.php"> 
+<input type="submit" name="home" value="Home"> 
+</form>
+</div> 
 
 <!--Logout code-->
 <div align = "right">
@@ -16,7 +23,10 @@
 </form>
 </div> 
 
+
+
 <center>
+<h1> Company Creation </h1>
 <form action ="create_company.php">
 Company Name: <input type = "text" name = "name" value = ""><br>
 Mailing Address: <input type = "text" name = "mailAdd" value = ""><br>

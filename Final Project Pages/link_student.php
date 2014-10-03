@@ -8,6 +8,12 @@
 	$user = $_SESSION['uname']; 
 	echo "<div align = 'left'> Logged in as '$user' </div>";
 ?>
+<!--Home Page-->
+<div align = "right">
+<form action="home.php"> 
+<input type="submit" name="home" value="Home"> 
+</form>
+</div> 
 
 <!--Logout code-->
 <div align = "right">
