@@ -4,7 +4,7 @@
 <script type="text/javascript" src="elements.js"></script>
 </head>
 <body>
-<form id="form" name="form">
+<form id="form" name="form" action="createForm.php" method="post">
 <p id="elements">
 </p>
 <p id="newItem">
@@ -19,11 +19,12 @@
 </select>
 <input type="button" value="Add Item" onclick="addItem()">
 </p>
+<input type="submit" value="Submit Form">
 </form>
 
 <script type="text/javascript">
 var elements = [];
-elements.push(new element_plainText(0, "FORM NAME", "\tThis form is blah blah"));
+elements.push(new element_plainText(0, "FORM NAME", ""));
 var count = 1;
 refreshForm();
 
@@ -56,6 +57,7 @@ function updateData(){
 		if(!elements[i]) continue;
 		var element = formelements[elements[i].getName()];
 		if(elements[i].type == "plainText"){
+			elements[i].text = element.value;
 		}else if(elements[i].type == "field"){
 			elements[i].text = element.value;
 		}else if(elements[i].type == "textArea"){
