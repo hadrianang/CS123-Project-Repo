@@ -1,26 +1,8 @@
 <html>
-<?php 
-	//check if logged-in
-	$status = false; 
-	session_start(); 
-	$status = $_SESSION['status']; 
-	if(!$status) header('Location:login.php'); 
-	$user = $_SESSION['uname']; 
-	echo "<div align = 'left'> Logged in as '$user' </div>";
+<?php
+	include 'page_setup.php';
+	prepare_page();
 ?>
-<!--Home Page-->
-<div align = "right">
-<form action="home.php"> 
-<input type="submit" name="home" value="Home"> 
-</form>
-</div> 
-
-<!--Logout code-->
-<div align = "right">
-<form action="login.php"> 
-<input type="submit" name="logout" value="Log-out"> 
-</form>
-</div> 
 
 <center>
 <?php

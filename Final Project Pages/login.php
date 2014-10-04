@@ -3,9 +3,7 @@
 <body> 
 
 <?php
-	$loggedin = false; 
-	session_start(); 
-	$_SESSION['status'] = $loggedin;
+	session_start();
 	$start = true; 
 	
 	$uname = $pass = "";
@@ -36,7 +34,6 @@ Password: <input type="password" name="Password" value="">
 date_default_timezone_set("Asia/Manila");
 	$u = $uname;
 	$p = $pass;
-	$_SESSION['uname'] = $uname; 
 	$conn = mysqli_connect("localhost","root","root","Practicum");
 	if (mysqli_connect_errno()){
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -54,6 +51,7 @@ date_default_timezone_set("Asia/Manila");
 			//page different depending on account type
 			$loggedin = true; 
 			$_SESSION['status'] = $loggedin;
+			$_SESSION['uname'] = $uname;
 			header('Location: home.php');  
 		}
 		else echo "<font color = 'red'> <p align=center>(Invalid Username or Password) </p> </font>";

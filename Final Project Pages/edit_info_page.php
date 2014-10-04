@@ -1,29 +1,11 @@
 <html>
-
-<?php 
-	//check if logged-in
-	$status = false; 
-	session_start(); 
-	$status = $_SESSION['status']; 
-	if(!$status) header('Location:login.php'); 
-	$user = $_SESSION['uname']; 
-	echo "<div align = 'left'> Logged in as '$user' </div>";
+<?php
+	include 'page_setup.php';
+	$user = prepare_page();
 ?>
-<!--Home Page-->
-<div align = "right">
-<form action="home.php"> 
-<input type="submit" name="home" value="Home"> 
-</form>
-</div> 
-
-<!--Logout code-->
-<div align = "right">
-<form action="login.php"> 
-<input type="submit" name="logout" value="Log-out"> 
-</form>
-</div> 
 
 <center>
+<h1> UPDATE ACCOUNT INFORMATION </h1><br>
 <?php
 	$conn = mysqli_connect("localhost","root","root","Practicum");
 	if (mysqli_connect_errno()){
@@ -38,9 +20,10 @@
 	echo "Contact Number: " . $results['ContactNumber'] . "<br>";
 ?>
 <br>
+*Re-type fields even if only one of them needs updating
 <form action = "edit_info.php">
-E-mail Address: <input type = "text" name = "email" value = ""> <br> 
-Contact Number: <input type = "text" name = "contactNum" value = ""> <br>
+New E-mail Address: <input type = "text" name = "email" value = ""> <br> 
+New Contact Number: <input type = "text" name = "contactNum" value = ""> <br>
 <input type = "submit" name = "submit" value = "Update Info"> <br>
 </center>
 </form>
