@@ -1,5 +1,9 @@
 <!DOCTYPE HTML> 
 <html>
+<link rel="stylesheet" href="style.css">
+<div class = "menu_bar">
+	
+</div>
 <body> 
 
 <?php
