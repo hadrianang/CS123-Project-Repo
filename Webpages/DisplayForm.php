@@ -5,16 +5,40 @@
 <script>
 var elements = [];
 var count = 0;
+var formName = "";
+var comments = [];
 </script>
 <script type="text/javascript" src="loadForm.php?id=<?php echo$_GET['id'];?>"></script>
+<script type="text/javascript" src="loadComments.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>"></script>
 </head>
-<body onload="refreshForm()">
-<form id="form" name="form" action="SubmitForm.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>" method="post">
+<body onload="setupForm()">
+<form id=\"form\" name=\"form\" method=\"post\">
 <p id="elements">
 </p>
-<input type="submit" value="Submit Form">
+<p id="comments">
+</p>
+<p id="buttons">
+</p>
 </form>
 <script type="text/javascript">
+function setupForm(){
+	if(formStep == 0){
+		document.getElementById("form").action = "SubmitForm.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>";
+		document.getElementById("buttons").innerHTML = "<input type=\"submit\" value=\"Submit Form\">";
+	}else{
+		document.getElementById("form").action = "SubmitComment.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>";
+		document.getElementById("buttons").innerHTML = "<input type=\"submit\" name=\"action\" value=\"Accept\" /><input type=\"submit\" name=\"action\" value=\"Reject\" />";
+	}
+	
+	refreshForm();
+	
+	var str = [];
+	for(i=0; i<comments.length; i++){
+		str.push(comments[i].display());
+		str.push("<br>");
+	}
+	document.getElementById("comments").innerHTML = str.join('');
+}
 
 function updateData(){
 	var formelements = document.getElementById("form").elements;

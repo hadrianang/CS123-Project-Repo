@@ -448,3 +448,19 @@ function element_table_addAnswerRow(id){
 	elements[id].rows++;
 	refreshForm();
 }
+
+function comment(step){
+	this.step = step;
+	this.databaseID = -1;
+	this.ans = "";
+	this.getName = function(){
+		return "comment_"+this.step+"_"+this.databaseID;
+	};
+	this.display = function(){
+		var str = [];
+		str.push("<p id=\"comment"+this.step+"\">");
+		str.push("<textarea id=\""+this.getName()+"\" form=\"form\" name=\""+this.getName()+"\">"+this.ans+"</textarea>");
+		str.push("</p>");
+		return str.join('');
+	};
+}
