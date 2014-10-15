@@ -53,10 +53,12 @@
 			{
 				if($success)
 				{
+					$type = $row['Type'];
 					//page different depending on account type
 					$loggedin = true; 
 					$_SESSION['status'] = $loggedin;
 					$_SESSION['uname'] = $uname;
+					$_SESSION['type'] = $type;
 					header('Location: home.php');  
 				}
 				else echo "<font color = 'red'> <p align=center>(Invalid Username or Password) </p> </font>";

@@ -3,7 +3,7 @@
 		<link rel="stylesheet" href="style.css">
 		<?php
 			include 'page_setup.php';
-			prepare_page();
+			$temp = prepare_page();
 		?>
 		<div id='body2'>
 			<center>
@@ -12,6 +12,7 @@
 				<a href=link_student_page.php>Link Students and Mentors</a><br>
 				<a href=create_company_page.php>Create Company</a><br>
 				<a href=edit_info_page.php>Update Account Information</a><br>
+				<a href=ModifyForm.php>Modify Forms</a><br>
 			</center>
 		</div>
 	</body>
