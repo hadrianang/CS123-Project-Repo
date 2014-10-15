@@ -1,21 +1,35 @@
 <html>
+<link rel="stylesheet" href="style.css">
 <?php
 	include 'page_setup.php';
 	prepare_page();
 ?>
-<h1>List of Practicum Students</h1>
+<form action = 'link_student_page.php'>
+	Search: <input type='text' name='searchbox'>
+	<input type='submit' id='submit' value='Search Now'>
+</form>
+
+
 <?php
-	
+	echo "<div id='body2'>";
+	echo "<center><h1>List of Practicum Students</h1></center>";
 	$conn = mysqli_connect("localhost","root","root","Practicum");
 	if (mysqli_connect_errno()){
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$quer = "SELECT * FROM account WHERE Type = 'student' ORDER BY Name"; 
+	$searchQuer = $_GET['searchbox'];
+	if($searchQuer==null) $searchQuer = '';
+	$quer = "
+	SELECT account.Username as Username, account.Name as Name, account_student.IDNumber as IDNumber, account_student.Mentor as Mentor
+	FROM account, account_student
+	WHERE account.Type = 'student' AND (Name LIKE '%$searchQuer%'OR IDNumber LIKE '%$searchQuer%' OR account_student.Mentor LIKE'%$searchQuer%') AND account.Username = account_student.Username
+	ORDER BY account.Name"; 
 	$results = mysqli_query($conn, $quer); 
 	//change link below when needed
 	echo 
-	"<table width = 50%>	
+	"<table width = 75%>	
 		<tr>
+			<td><b>ID Number</b></td>
 			<td><b>Student Name</b></td>
 			<td><b>Current Mentor</b></td>
 		</tr>";
@@ -23,14 +37,18 @@
 	{
 		$u = $arr['Username']; 
 		$n = $arr['Name']; 
-		$getMentor = mysqli_query($conn, "SELECT * FROM account_student WHERE Username = '$u'");
-		$temp = mysqli_fetch_array($getMentor); 
-		$m = $temp['Mentor']; 
+		$id = $arr['IDNumber'];
+		$m = $arr['Mentor']; 
+		$getMentor = mysqli_query($conn, "SELECT Name from account WHERE Username = '$m'");
+		$temp2 = mysqli_fetch_array($getMentor); 
+		$mentor_name = $temp2['Name']; 
 		echo "<tr>
+				<td>$id</td>
 				<td><a href=link_student.php?username=" . $u . "&name=" . $n ."> $n</a> </td>
-				<td>$m <br></td> 
+				<td>$mentor_name <br></td> 
 			</tr>";
 	}
 	echo "</table>";
+	echo "</div>";
 ?>
 </html> 

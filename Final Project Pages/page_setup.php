@@ -11,6 +11,9 @@
 		
 		echo "<div align = 'left'> Logged in as $user </div>";
 		echo"
+		<div id = 'menu_bar'>
+			PracSys
+		</div>
 		<!--Home Page-->
 		<div align = 'right'>
 		<form action='home.php'> 
