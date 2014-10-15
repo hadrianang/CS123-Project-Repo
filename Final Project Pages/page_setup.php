@@ -18,5 +18,11 @@
 		$hold = array($user, $type); 
 		return $hold;
 	}
+	
+	function sql_setup()
+	{
+		$conn = mysqli_connect("localhost","root","root","Practicum");
+		return $conn; 
+	}
 ?>
 </html>

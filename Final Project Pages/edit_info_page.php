@@ -9,7 +9,7 @@
 			<center>
 				<h1> UPDATE ACCOUNT INFORMATION </h1><br>
 				<?php
-					$conn = mysqli_connect("localhost","root","root","Practicum");
+					$conn = sql_setup();
 					if (mysqli_connect_errno()){
 						echo "Failed to connect to MySQL: " . mysqli_connect_error();
 					}

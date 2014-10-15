@@ -6,7 +6,7 @@
 			session_start(); 
 			$user = $_SESSION['uname'];
 			$success = true; 
-			$conn = mysqli_connect("localhost","root","root","Practicum");
+			$conn = sql_setup();
 			echo "<div id='body2'>";
 			if (mysqli_connect_errno()){
 				echo "Failed to connect to MySQL: " . mysqli_connect_error();
