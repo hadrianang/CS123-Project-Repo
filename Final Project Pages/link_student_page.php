@@ -5,7 +5,7 @@
 	prepare_page();
 ?>
 <form action = 'link_student_page.php'>
-	Search: <input type='text' name='searchbox'>
+	Search: <input type='text' name='searchbox' value ="">
 	<input type='submit' id='submit' value='Search Now'>
 </form>
 
@@ -17,7 +17,8 @@
 	if (mysqli_connect_errno()){
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$searchQuer = $_GET['searchbox'];
+	$searchQuer = '';
+	if(isset($_GET['searchbox'])) $searchQuer = $_GET['searchbox'];
 	if($searchQuer==null) $searchQuer = '';
 	$quer = "
 	SELECT account.Username as Username, account.Name as Name, account_student.IDNumber as IDNumber, account_student.Mentor as Mentor

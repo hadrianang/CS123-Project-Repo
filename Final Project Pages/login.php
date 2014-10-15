@@ -39,7 +39,8 @@
 		date_default_timezone_set("Asia/Manila");
 			$u = $uname;
 			$p = $pass;
-			$conn = mysqli_connect("localhost","root","root","Practicum");
+			include 'page_setup.php';
+			$conn = sql_setup();
 			if (mysqli_connect_errno()){
 				echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			}

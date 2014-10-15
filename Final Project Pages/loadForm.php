@@ -1,6 +1,7 @@
 <?php
 header("content-type: application/x-javascript");
-$con=mysqli_connect("localhost","root","","PracSys");
+include 'page_setup.php';
+$con=sql_setup();
 
 if (mysqli_connect_errno()) {
 	die( "Failed to connect to MySQL: " . mysqli_connect_error() );

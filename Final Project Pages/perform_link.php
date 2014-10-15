@@ -12,7 +12,7 @@
 			$tok = explode(" : ", $string); 
 			$mentorUsername = $tok[1];
 			$student = $_GET['student'];
-			$conn = mysqli_connect("localhost","root","root","Practicum");
+			$conn = sql_setup();
 			if (mysqli_connect_errno()){
 				echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			}

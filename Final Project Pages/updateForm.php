@@ -1,7 +1,8 @@
 <html>
 <body>
 <?php
-$con=mysqli_connect("localhost","root","","PracSys");
+include 'page_setup.php';
+$con=sql_setup();
 
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();

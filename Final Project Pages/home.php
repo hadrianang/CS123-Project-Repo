@@ -3,6 +3,7 @@
 		<link rel="stylesheet" href="style.css">
 		<?php
 			include 'page_setup.php';
+			// temp contains the username [0] of the current user and the type of account [1]
 			$temp = prepare_page();
 		?>
 		<div id='body2'>
