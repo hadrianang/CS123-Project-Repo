@@ -17,11 +17,20 @@
 				$password = $_GET['password'];
 				$name = $_GET['name'];
 				$type = $_GET['type'];
+
+				$idnum = $_GET['idnum'];
+				$course = $_GET['course'];
 				
-				$valid_chars = array("a","b","c","d","e","f","g","h","i","j",
+				$company = $_GET['company'];
+				$dept = $_GET['department'];
+				$title = $_GET['title'];
+
+				$valid_username_chars = array("a","b","c","d","e","f","g","h","i","j",
 					"k","l","m","n","o","p","q","r","s","t","u","v","w","x",
 					"y","z","0","1","2","3","4","5","6","7","8","9","_");
-				$username_check = str_replace($valid_chars, "", strtolower($username));
+				$valid_idnum_chars = array("0","1","2","3","4","5","6","7","8","9");
+				$username_check = str_replace($valid_username_chars, "", strtolower($username));
+				$idnum_check = str_replace($valid_idnum_chars, "", strtolower($idnum));
 				$conn = sql_setup();
 				if (mysqli_connect_errno()){
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -29,6 +38,21 @@
 				if (strlen($username) < 1 || strlen($username_check) > 0){
 					$success = false;
 					echo "Invalid Username";
+				} else if(strlen(trim($password)) < 1){
+					$success = false;
+					echo "Invalid Password";
+				} else if(strlen(trim($name)) < 1){
+					$success = false;
+					echo "Invalid Name";
+				} else if($type=="student" && (strlen(trim($idnum)) < 1 || strlen(trim($course)) < 1 || strlen($idnum_check) > 0)){
+					$success = false;
+					echo "Invalid Student Information";
+				} else if($type=="faculty" && (strlen(trim($idnum)) < 1 || strlen($idnum_check) > 0)){
+					$success = false;
+					echo "Invalid Faculty Information";
+				} else if($type=="mentor" && (strlen(trim($company)) < 1 || strlen(trim($dept)) < 1 || strlen(trim($title)) < 1)){
+					$success = false;
+					echo "Invalid Mentor Information";
 				} else {
 					$quer = "INSERT INTO account (Username, Password, Name, Type)
 					VALUES(\"$username\",\"$password\",\"$name\", \"$type\")";
@@ -41,8 +65,7 @@
 					if($success) $inserted = true; 
 					if($type=="student")
 					{
-						$idnum = $_GET['idnum'];
-						$course = $_GET['course'];
+						
 						$insertStudent = "INSERT INTO Account_Student (Username, IDNumber, Course)
 						VALUES(\"$username\",\"$idnum\", \"$course\")";
 						if (!mysqli_query($conn,$insertStudent))
@@ -57,9 +80,7 @@
 						}
 					}elseif($type=="mentor")
 					{
-						$company = $_GET['company'];
-						$dept = $_GET['department'];
-						$title = $_GET['title']; 
+						 
 						$error = mysqli_error($conn); 
 						$insertMentor = "INSERT INTO Account_Mentor
 						VALUES(\"$username\",\"$company\",\"$title\",\"$dept\")";
@@ -74,7 +95,6 @@
 						}
 					}else
 					{
-						$idnum = $_GET['idnum'];
 						$error = mysqli_error($conn); 
 						$insertFaculty = "INSERT INTO Account_Faculty
 						VALUES(\"$username\",\"$idnum\")";
