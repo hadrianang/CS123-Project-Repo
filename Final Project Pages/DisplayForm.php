@@ -1,18 +1,35 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
+<link rel="stylesheet" href="style.css">
 <head>
 <title>Display Form</title>
+<?php
+include 'page_setup.php';
+$temp = prepare_page();
+?>
 <script type="text/javascript" src="elements.js"></script>
 <script>
 var elements = [];
 var count = 0;
 var formName = "";
+var formPath = "";
 var comments = [];
+var formStep = 0;
 </script>
-<script type="text/javascript" src="loadForm.php?id=<?php echo$_GET['id'];?>"></script>
+<script type="text/javascript" src="loadForm.php?id=<?php echo$_GET['id'];?>&username=<?php echo$_GET['username']?>"></script>
 <script type="text/javascript" src="loadComments.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>"></script>
+<script>
+<?php
+$con = sql_setup();
+
+$result = mysqli_query($con, "SELECT * FROM Account WHERE Username='$temp';");
+$resarr = mysqli_fetch_array($result);
+echo "var displayButtons = '" . strtoupper($resarr['Type'])[0] . "' == formPath[formStep];";
+?>
+</script>
 </head>
 <body onload="setupForm()">
-<form id=\"form\" name=\"form\" method=\"post\">
+<div id='body2'>
+<form id="form" name="form" method="post">
 <p id="elements">
 </p>
 <p id="comments">
@@ -20,14 +37,17 @@ var comments = [];
 <p id="buttons">
 </p>
 </form>
+</div>
 <script type="text/javascript">
 function setupForm(){
-	if(formStep == 0){
-		document.getElementById("form").action = "SubmitForm.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>";
-		document.getElementById("buttons").innerHTML = "<input type=\"submit\" value=\"Submit Form\">";
-	}else{
-		document.getElementById("form").action = "SubmitComment.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>";
-		document.getElementById("buttons").innerHTML = "<input type=\"submit\" name=\"action\" value=\"Accept\" /><input type=\"submit\" name=\"action\" value=\"Reject\" />";
+	if(displayButtons){
+		if(formStep == 0){
+			document.getElementById("form").action = "SubmitForm.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>";
+			document.getElementById("buttons").innerHTML = "<input type=\"submit\" value=\"Submit Form\" onclick=\"this.disabled=true;this.value='Sending, please wait...';this.form.submit();\">";
+		}else{
+			document.getElementById("form").action = "SubmitComment.php?id=<?php echo$_GET['id']?>&username=<?php echo$_GET['username']?>";
+			document.getElementById("buttons").innerHTML = "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"Reject\"><input type=\"submit\" value=\"Accept\" onclick=\"this.disabled=true;this.value='Sending, please wait...';document.getElementById('action').value='Accept';this.form.submit();\"><input type=\"submit\" value=\"Reject\" onclick=\"this.disabled=true;this.value='Sending, please wait...';this.form.submit();\">";
+		}
 	}
 	
 	refreshForm();

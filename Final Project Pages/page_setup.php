@@ -1,6 +1,4 @@
-<html>
 <?php
-	
 	function prepare_page()
 	{
 		//check if logged-in
@@ -15,26 +13,18 @@
 		<div id = 'menu_bar'>
 			PracSys
 		</div>
-		<!--Home Page-->
-		<div align = 'right'>
-		<form action='home.php'> 
-		<input type='submit' name='home' value='Home'> 
-		</form>
-		</div> 
-
-		<!--Logout code-->
-		<div align = 'right'>
-		<form action='logout.php'> 
-		<input type='submit' name='logout' value='Log-out'> 
-		</form>
-		</div> ";
+		<link rel='stylesheet' href='style.css'>
+		<div id = 'menu_bar'>
+		<li class = 'logo'> <img src='testlogo.png' width='100' height='12' alt='TEST'> </li>
+		<li class = 'link'> <a href='home.php'> Home </a></li> 
+		<li class = 'link'> <a href='logout.php'> Log Out </a></li> 
+		</div>";
 		return $user; 
 	}
 	
 	function sql_setup()
 	{
-		$conn = mysqli_connect("localhost","root","root","Practicum");
+		$conn = mysqli_connect("localhost","root","root","PracSys");
 		return $conn; 
 	}
 ?>
-</html>

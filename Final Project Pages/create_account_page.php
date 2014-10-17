@@ -1,4 +1,4 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 	<link rel="stylesheet" href="style.css">
 	<?php
 		include 'page_setup.php';
@@ -46,7 +46,7 @@
 				</select><br>
 				Department: <input type = "text" name = "department" value = ""><br>
 				Title: <input type = "text" name = "title" value = ""><br><br>
-				<input type = "submit" name = "submit" value = "Create Account">
+				<input type="submit" value="Create Account" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"></input>
 			</form> 
 		</center>
 	</div>

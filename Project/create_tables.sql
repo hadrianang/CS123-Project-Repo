@@ -25,8 +25,8 @@ CREATE TABLE Account_Mentor(
 	Title VARCHAR(50) NOT NULL,
 	Department VARCHAR(50) NOT NULL,
 	PRIMARY KEY(Username),
-	FOREIGN KEY(Username) REFERENCES Account(Username),
-	FOREIGN KEY(Company) REFERENCES Company(Name)
+	FOREIGN KEY(Username) REFERENCES Account(Username) ON DELETE CASCADE,
+	FOREIGN KEY(Company) REFERENCES Company(Name) ON DELETE CASCADE
 );
 
 CREATE TABLE Account_Student(
@@ -35,21 +35,22 @@ CREATE TABLE Account_Student(
 	Mentor VARCHAR(50),
 	Course VARCHAR(10) NOT NULL,
 	PRIMARY KEY(Username),
-	FOREIGN KEY(Username) REFERENCES Account(Username),
-	FOREIGN KEY(Mentor) REFERENCES Account_Mentor(Username)
+	FOREIGN KEY(Username) REFERENCES Account(Username) ON DELETE CASCADE,
+	FOREIGN KEY(Mentor) REFERENCES Account_Mentor(Username) ON DELETE CASCADE
 );
 
 CREATE TABLE Account_Faculty(
 	Username VARCHAR(50) NOT NULL,
 	IDNumber INT(6) NOT NULL,
 	PRIMARY KEY(Username),
-	FOREIGN KEY(Username) REFERENCES Account(Username)
+	FOREIGN KEY(Username) REFERENCES Account(Username) ON DELETE CASCADE
 );
 
 CREATE TABLE Form(
 	ID INT(5) AUTO_INCREMENT NOT NULL,
 	Name VARCHAR(100) NOT NULL,
 	AccountPath VARCHAR(5) NOT NULL, 
+	Active BOOLEAN NOT NULL,
 	PRIMARY KEY(ID)
 );
 
@@ -58,7 +59,7 @@ CREATE TABLE FormInstance(
 	Username VARCHAR(50) NOT NULL,
 	FormID INT(5) NOT NULL,
 	Step INT(1) NOT NULL,
-	LastResponse BOOLEAN,
+	LastResponse BOOLEAN NOT NULL,
 	PRIMARY KEY(ID),
 	FOREIGN KEY(Username) REFERENCES Account_Student(Username),
 	FOREIGN KEY(FormID) REFERENCES Form(ID) ON DELETE CASCADE
@@ -89,7 +90,7 @@ CREATE TABLE Answer(
 	Param1 INT(6),
 	Param2 INT(6),
 	Val VARCHAR(10000) NOT NULL,
-	PRIMARY KEY(ElementID, InstanceID),
+	PRIMARY KEY(ElementID, InstanceID, Param1, Param2),
 	FOREIGN KEY(ElementID) REFERENCES Element(ID) ON DELETE CASCADE,
 	FOREIGN KEY(InstanceID) REFERENCES FormInstance(ID) ON DELETE CASCADE
 );
@@ -171,3 +172,6 @@ CREATE TABLE Element_Table_Column(
 	PRIMARY KEY(ID),
 	FOREIGN KEY(ElementID) REFERENCES Element_Table(ID) ON DELETE CASCADE
 );
+
+INSERT INTO Account VALUES('root', 'root', '', 'root', '', 'faculty');
+INSERT INTO Account_Faculty VALUES('root', -1);

@@ -5,6 +5,7 @@
 		<?php
 			session_start(); 
 			$user = $_SESSION['uname'];
+			include 'page_setup.php';
 			$success = true; 
 			$conn = sql_setup();
 			echo "<div id='body2'>";

@@ -1,4 +1,4 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 <link rel="stylesheet" href="style.css">
 <?php
 	include 'page_setup.php';

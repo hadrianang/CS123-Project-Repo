@@ -139,7 +139,7 @@ function element_dropDown(id, name, text){
 		str.push("<p id=\"element"+this.id+"\">");
 		str.push("<b>"+this.name+"</b>"+"<br>");
 		str.push(this.text+"<br>");
-		str.push("<select id=\""+this.getName()+"\">");
+		str.push("<select id=\""+this.getName()+"\" name=\""+this.getName()+"\">");
 		for(i=0; i<this.choices.length; i++){
 			str.push("<option value=\""+this.choices[i]+"\"");
 			if(i == this.cur){
@@ -238,18 +238,18 @@ function element_radioCluster(id, name, text){
 		str.push("<p id=\"element"+this.id+"\">");
 		str.push("<b>"+this.name+"</b>"+"<br>");
 		str.push(this.text+"<br>");
-		str.push("<table>");
+		str.push("<table class=\"custom\">");
 		str.push("<tr>");
 		for(i=0; i<=this.cols; i++){
-			str.push("<td>");
+			str.push("<th>");
 			if(i != 0){
 				str.push(this.colText[i-1]);
 			}
-			str.push("</td>");
+			str.push("</th>");
 		}
 		str.push("</tr>");
 		for(i=0; i<this.rows; i++){
-			str.push("<tr>");
+			str.push("<tr" + (i%2==0?"":" class=\"alt\"") + ">");
 			str.push("<td>" + this.rowText[i] + "</td>");
 			for(j=0; j<this.cols; j++){
 				str.push("<td>");
@@ -381,17 +381,17 @@ function element_table(id, name, text, type){
 		str.push("<p id=\"element"+this.id+"\">");
 		str.push("<b>"+this.name+"</b>"+"<br>");
 		str.push(this.text+"<br>");
-		str.push("<table>");
+		str.push("<table class=\"custom\">");
 		str.push("<tr>");
 		if(this.hasRowText){
-			str.push("<td></td>");
+			str.push("<th></th>");
 		}
 		for(i=0; i<this.cols; i++){
-			str.push("<td>"+this.colText[i]+"</td>");
+			str.push("<th>"+this.colText[i]+"</th>");
 		}
 		str.push("</tr>");
 		for(i=0; i<this.rows; i++){
-			str.push("<tr>");
+			str.push("<tr" + (i%2==0?"":" class=\"alt\"") + ">");
 			if(this.hasRowText){
 				str.push("<td>"+this.rowText[i]+"</td>");
 			}

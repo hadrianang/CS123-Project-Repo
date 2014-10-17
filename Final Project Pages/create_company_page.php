@@ -1,4 +1,4 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 	<link rel="stylesheet" href="style.css">
 
 	<?php
@@ -12,7 +12,7 @@
 				Company Name: <input type = "text" name = "name" value = ""><br>
 				Mailing Address: <input type = "text" name = "mailAdd" value = ""><br>
 				Phone Number: <input type = "text" name = "phoneNum" value = ""><br><br>
-				<input type = "submit" name = "submit" value = "Create Company">
+				<input type = "submit" value = "Create Company" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();">
 			</form> 
 		</center>
 	</div>

@@ -1,4 +1,4 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 	<link rel="stylesheet" href="style.css">
 	<?php
 		include 'page_setup.php';
@@ -44,7 +44,7 @@
 				</select><br><br>
 				<!--Use hidden values to pass the student username to the next page-->
 				<input type = "hidden" name = "student" value = <?php echo $u?>>
-				<input type = "submit" name = "submit" value = "Link Student to Mentor">
+				<input type = "submit" value = "Link Student to Mentor" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();">
 			</form> 
 			<a href='link_student_page.php'><button>Return to Student List</button></a>
 			</center>

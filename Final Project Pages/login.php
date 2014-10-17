@@ -1,8 +1,8 @@
 <!DOCTYPE HTML> 
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 	<link rel="stylesheet" href="style.css">
 	<div id = "menu_bar">
-		PracSys
+		<li class = "logo"> <img src="testlogo.png" width="100" height="48" alt="TEST"> </li>
 	</div>
 	<body> 
 

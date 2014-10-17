@@ -1,4 +1,4 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 	<link rel="stylesheet" href="style.css">
 
 		<?php
@@ -26,7 +26,7 @@
 				<form action = "edit_info.php">
 					New E-mail Address: <input type = "text" name = "email" value = ""> <br> 
 					New Contact Number: <input type = "text" name = "contactNum" value = ""> <br><br>
-				<input type = "submit" name = "submit" value = "Update Info"> <br>
+				<input type = "submit" value = "Update Info" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"> <br>
 			</center>
 		</div>
 	</form>

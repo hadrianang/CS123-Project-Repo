@@ -1,21 +1,20 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 <link rel="stylesheet" href="style.css">
-<?php
-	include 'page_setup.php';
-	prepare_page();
-?>
-<div id='body2'>
 <head>
-<title>Modify Form</title>
 <script type="text/javascript" src="elements.js"></script>
 <script>
 var elements = [];
 var count = 0;
 var formName = "";
 </script>
-<script type="text/javascript" src="loadForm.php?id=<?php echo$_GET['id'];?>"></script>
+<script type="text/javascript" src="loadForm.php?id=<?php echo$_GET['id'];?>&username="></script>
 </head>
 <body onload="refreshForm()">
+<?php
+	include 'page_setup.php';
+	prepare_page();
+?>
+<div id='body2'>
 <form id="form" name="form" action="updateForm.php?id=<?php echo$_GET['id'];?>" method="post">
 <p id="elements">
 </p>
@@ -31,7 +30,7 @@ var formName = "";
 </select>
 <input type="button" value="Add Item" onclick="addItem()">
 </p>
-<input type="submit" value="Submit Form">
+<input type="submit" value="Submit Form" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();">
 </form>
 
 <script type="text/javascript">

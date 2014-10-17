@@ -1,17 +1,17 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 <link rel="stylesheet" href="style.css">
 <?php
 	include 'page_setup.php';
 	prepare_page();
 ?>
-<form action = 'link_student_page.php'>
-	Search: <input type='text' name='searchbox' value ="">
-	<input type='submit' id='submit' value='Search Now'>
-</form>
 
 
 <?php
 	echo "<div id='body2'>";
+	echo "<form action = 'link_student_page.php'>
+	<input type='submit' id='submit' value='Search Now'>
+	<input type='text' name='searchbox' value =''>
+	</form>";
 	echo "<center><h1>List of Practicum Students</h1></center>";
 	$conn = sql_setup();
 	if (mysqli_connect_errno()){
@@ -28,12 +28,13 @@
 	$results = mysqli_query($conn, $quer); 
 	//change link below when needed
 	echo 
-	"<table width = 75%>	
+	"<table class=\"custom\">	
 		<tr>
-			<td><b>ID Number</b></td>
-			<td><b>Student Name</b></td>
-			<td><b>Current Mentor</b></td>
+			<th><b>ID Number</b></th>
+			<th><b>Student Name</b></th>
+			<th><b>Current Mentor</b></th>
 		</tr>";
+	$count = 0;
 	while ($arr = mysqli_fetch_array($results))
 	{
 		$u = $arr['Username']; 
@@ -43,7 +44,7 @@
 		$getMentor = mysqli_query($conn, "SELECT Name from account WHERE Username = '$m'");
 		$temp2 = mysqli_fetch_array($getMentor); 
 		$mentor_name = $temp2['Name']; 
-		echo "<tr>
+		echo "<tr" . ($count++%2==0?"":" class=\"alt\"") . ">
 				<td>$id</td>
 				<td><a href=link_student.php?username=" . $u . "&name=" . $n ."> $n</a> </td>
 				<td>$mentor_name <br></td> 

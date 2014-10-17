@@ -1,13 +1,15 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 <body>
 <?php
 include 'page_setup.php';
 $con=sql_setup();
+$user=prepare_page();
 
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
+echo "<div id='body2'>";
 $formID = $_GET['id'];
 
 $result = mysqli_query($con, "SELECT * FROM Form WHERE ID=$formID;");
@@ -23,7 +25,7 @@ $elements = [];
 
 foreach($_POST as $key => $value){
 	if($key == "formname"){
-		mysqli_query($con, "UPDATE FORM SET Name=$value WHERE ID=$formID;");
+		mysqli_query($con, "UPDATE FORM SET Name='$value' WHERE ID=$formID;");
 		unset($_POST[$key]);
 		continue;
 	}
@@ -47,10 +49,10 @@ foreach($elements as $key => $value){
 	$type = $value["type"];
 	$name = $value["name"];
 	$text = $value["text"];
-	if(!mysqli_query($con, "INSERT INTO Element (FormID, ElementType, Name, Description) VALUES ($formID, '$type', '$name', '$text');")){
+	if(!mysqli_query($con, "INSERT INTO Element (FormID, ElementType, Name, Description) VALUES ($formID, '$type', \"$name\", \"$text\");")){
 		die('Error: ' . mysqli_error($con));
 	}
-	$result = mysqli_query($con, "SHOW TABLE STATUS FROM Praxis WHERE Name='Element'");
+	$result = mysqli_query($con, "SHOW TABLE STATUS FROM PracSys WHERE Name='Element'");
 	$id = mysqli_fetch_array($result)['Auto_increment'] - 1;
 	$elements[$key]["ID"] = $id;
 	switch($type){
@@ -112,6 +114,8 @@ foreach($_POST as $key => $value){
 
 mysqli_close($con);
 echo "Success!";
+echo "<br><a href=\"ModifyForm.php?id=$formID\">Return</a>";
+echo "</div>";
 ?>
 </body>
 </html>

@@ -7,7 +7,7 @@
 	<div id='body2'>
 		<center>
 			<?php
-				$conn = mysqli_connect("localhost","root","root","Practicum");
+				$conn = sql_setup();
 				if (mysqli_connect_errno()){
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 				}
@@ -15,23 +15,15 @@
 				$inserted = false; 
 				$username = $_GET['username']; 
 				$password = $_GET['password'];
-				$name = $_GET['name']; 
-				//if student / faculty
-				$idnum = $_GET['idnum'];
-				$course = $_GET['course'];
-				$type = $_GET['type']; 
-				
-				//if mentor
-				$company = $_GET['company'];
-				$dept = $_GET['department'];
-				$title = $_GET['title']; 
+				$name = $_GET['name'];
+				$type = $_GET['type'];
 				
 				$conn = sql_setup();
 				if (mysqli_connect_errno()){
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 				}
 				$quer = "INSERT INTO account (Username, Password, Name, Type)
-				VALUES('$username','$password','$name', '$type')";
+				VALUES(\"$username\",\"$password\",\"$name\", \"$type\")";
 				if (!mysqli_query($conn,$quer))
 				{
 					echo "ERROR CREATING ACCOUNT"; 
@@ -41,8 +33,10 @@
 				if($success) $inserted = true; 
 				if($type=="student")
 				{
+					$idnum = $_GET['idnum'];
+					$course = $_GET['course'];
 					$insertStudent = "INSERT INTO Account_Student (Username, IDNumber, Course)
-					VALUES('$username','$idnum', '$course')";
+					VALUES(\"$username\",\"$idnum\", \"$course\")";
 					if (!mysqli_query($conn,$insertStudent))
 					{
 						$error = mysqli_error($conn); 
@@ -55,9 +49,12 @@
 					}
 				}elseif($type=="mentor")
 				{
+					$company = $_GET['company'];
+					$dept = $_GET['department'];
+					$title = $_GET['title']; 
 					$error = mysqli_error($conn); 
 					$insertMentor = "INSERT INTO Account_Mentor
-					VALUES('$username','$company','$title','$dept')";
+					VALUES(\"$username\",\"$company\",\"$title\",\"$dept\")";
 					if (!mysqli_query($conn,$insertMentor))
 					{
 						$dropWrong = "DELETE FROM account WHERE Username ='" . $username . "'"; 
@@ -69,9 +66,10 @@
 					}
 				}else
 				{
+					$idnum = $_GET['idnum'];
 					$error = mysqli_error($conn); 
 					$insertFaculty = "INSERT INTO Account_Faculty
-					VALUES('$username','$idnum')";
+					VALUES(\"$username\",\"$idnum\")";
 					if (!mysqli_query($conn,$insertFaculty))
 					{
 						$dropWrong = "DELETE FROM account WHERE Username ='" . $username . "'"; 

@@ -1,25 +1,39 @@
-<html>
+<html><title>PracSys: Ateneo DISCS Practicum Management System</title>
 <body>
 <?php
 include 'page_setup.php';
 $con=sql_setup();
+$user=prepare_page();
 
 if(mysqli_connect_errno()){
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
+echo "<div id='body2'>";
 $formID = $_GET['id'];
 $student = $_GET['username'];
 
-if(!mysqli_query($con, "INSERT INTO FormInstance (Username, FormID, Step) VALUES ('$student', $formID, 0);")){
-	die('Error: ' . mysqli_error($con));
+$result = mysqli_query($con, "SELECT * FROM FormInstance WHERE Username='$student' AND FormID=$formID;");
+$updating = FALSE;
+$step = 0;
+if(mysqli_num_rows($result) != 0){
+	$updating = TRUE;
+	$step = mysqli_fetch_array($result)['Step'];
+	if(!mysqli_query($con, "DELETE FROM FormInstance WHERE Username='$student' AND FormID=$formID;")){
+		die("Failed to remove old instance.");
+	}
 }
 
-$result = mysqli_query($con, "SHOW TABLE STATUS FROM Praxis WHERE Name='FormInstance'");
+$step = $step+1;
+if(!mysqli_query($con, "INSERT INTO FormInstance (Username, FormID, Step, LastResponse) VALUES ('$student', $formID, $step, TRUE);")){
+	die('Error: ' . mysqli_error($con));
+}
+$result = mysqli_query($con, "SHOW TABLE STATUS FROM PracSys WHERE Name='FormInstance'");
 $instanceID = mysqli_fetch_array($result)['Auto_increment'] - 1;
 
 foreach($_POST as $key => $value){
 	$params = explode('_', $key);
+	if($params[0] == "comment") continue;
 	$databaseID = intval($params[2]);
 	$sql = "";
 	switch($params[3]){
@@ -41,8 +55,17 @@ foreach($_POST as $key => $value){
 	}
 }
 
+$result = mysqli_query($con, "SELECT * FROM Account WHERE Username='$user';");
+$type = mysqli_fetch_array($result)['Type'];
+
 mysqli_close($con);
 echo "Success!";
+if($type == 'student'){
+	echo "<br><a href=\"student_form_list.php\">Return to Form List</a>";
+}else{
+	echo "<br><a href=\"mentor_form_list.php\">Return to Form List</a>";
+}
+echo "</div>";
 ?>
 </body>
 </html>
