@@ -1,0 +1,11 @@
+The "Final Project Pages" folder contains the files from the 
+defense earlier today. These are probably more stable and they were the files originally presented.
+
+The "POST-DEFENSE Pages" folder contains a few edited pages, which incorporate a few new features.
+One of the important additions is input checking to prevent creation of inappropriate accounts.
+However, these features are new and were implemented quickly and have thus not been thoroughly tested
+(though in terms of core functionality, they already work). Further improvements with regard to error messages
+and handling to be added in the future.
+
+The word file "Final Documents" contains the documentation for the project (this is the file that was printed
+and binded and was submitted earlier).
