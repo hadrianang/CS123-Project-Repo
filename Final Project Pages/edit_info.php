@@ -15,9 +15,8 @@
 			
 			$email = $_GET['email']; 
 			$contact = $_GET['contactNum']; 
-			
 			$quer = "UPDATE account 
-			SET Email = '$email', ContactNumber = '$contact'
+			SET Email = \"$email\", ContactNumber = \"$contact\"
 			WHERE Username = '$user'"; 
 			if(!mysqli_query($conn,$quer))
 			{

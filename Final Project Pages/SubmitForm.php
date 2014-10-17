@@ -38,16 +38,16 @@ foreach($_POST as $key => $value){
 	$sql = "";
 	switch($params[3]){
 		case "field": case "area": case "drop":
-			$sql = "INSERT INTO Answer (ElementID, InstanceID, Val) VALUES ($databaseID, $instanceID, '$value');";
+			$sql = "INSERT INTO Answer (ElementID, InstanceID, Val) VALUES ($databaseID, $instanceID, \"$value\");";
 			break;
 		case "radio":
 			$tmp = $params[5];
-			$sql = "INSERT INTO Answer (ElementID, InstanceID, Param1, Val) VALUES ($databaseID, $instanceID, $tmp, '$value');";
+			$sql = "INSERT INTO Answer (ElementID, InstanceID, Param1, Val) VALUES ($databaseID, $instanceID, $tmp, \"$value\");";
 			break;
 		case "table":
 			$tmp = $params[4];
 			$tmp2 = $params[5];
-			$sql = "INSERT INTO Answer (ElementID, InstanceID, Param1, Param2, Val) VALUES ($databaseID, $instanceID, $tmp, $tmp2, '$value');";
+			$sql = "INSERT INTO Answer (ElementID, InstanceID, Param1, Param2, Val) VALUES ($databaseID, $instanceID, $tmp, $tmp2, \"$value\");";
 			break;
 	}
 	if(!mysqli_query($con, $sql)){

@@ -16,7 +16,7 @@
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 				}
 				
-				$quer = "INSERT INTO company VALUE('$name','$mailAdd','$phoneNum')";
+				$quer = "INSERT INTO company VALUE(\"$name\",\"$mailAdd\",\"$phoneNum\")";
 				if (!mysqli_query($conn,$quer))
 				{
 					$error = mysqli_error($conn); 

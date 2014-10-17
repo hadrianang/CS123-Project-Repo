@@ -46,7 +46,7 @@ while($row = mysqli_fetch_array($result)){
 				$resultb = mysqli_query($con, "SELECT * FROM Answer WHERE ElementID=$elementID AND InstanceID=$instanceID;");
 				$rowb = mysqli_fetch_array($resultb);
 				$tmp = $rowb['Val'];
-				echo "temp.ans = '$tmp';";
+				echo "temp.ans = \"$tmp\";";
 			}
 			echo "elements.push(temp);";
 			break;
@@ -60,7 +60,7 @@ while($row = mysqli_fetch_array($result)){
 				$resultb = mysqli_query($con, "SELECT * FROM Answer WHERE ElementID=$elementID AND InstanceID=$instanceID;");
 				$rowb = mysqli_fetch_array($resultb);
 				$tmp = $rowb['Val'];
-				echo "temp.ans = '$tmp';";
+				echo "temp.ans = \"$tmp\";";
 			}
 			echo "elements.push(temp);";
 			break;
@@ -148,7 +148,7 @@ while($row = mysqli_fetch_array($result)){
 					}
 					$tmp2 = $rowb['Param2'];
 					$tmp3 = $rowb['Val'];
-					echo "temp.ans['$tmp" . "_" . "$tmp2'] = '$tmp3';";
+					echo "temp.ans['$tmp" . "_" . "$tmp2'] = \"$tmp3\";";
 				}
 			}
 			break;
