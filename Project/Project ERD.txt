@@ -1,0 +1,97 @@
+Entities:
+
+1. Account (PK Username)
+	-	Username
+	-	Password
+	-	Email
+	-	Name
+	-	Contact Number
+	Sub:
+		a.	Student
+			-	ID number
+			-	Course
+		b.	Mentor
+			-	Title
+			-	Department / Division
+		c.	Faculty
+			-	Faculty ID?
+		
+2.	Company
+	-	Company Name
+	-	Mailing Address
+	-	Phone Number
+	
+3.	Practicum Approval Form (PK Form Number; FK Student ID)
+	-	Form ID or Number
+	-	Start Date
+	-	End Date
+	-	Work Hours per Week
+	-	Approval Date
+	-	Comments
+	-	Signature?
+	
+4.	Practicum Learning Contract (PK Learning Contract Number; FK Student ID)
+	-	Learning Contract Number
+	-	Title / Position of Student Practicum
+	-	Background
+	-	Core Competencies
+	-	Signature?
+	
+5.	Projected Deliverables (PK Deliverable ID)
+	-	Deliverable ID
+	-	Outcome
+	-	Activity
+	
+6.	Learning Contract - Deliverable (PK Learning Contract Number - Deliverable ID) (associate entity)
+	-	Start Date
+	-	End Date
+	
+7.	Midpoint Review (PK Midpoint Review ID)
+	-	Midpoint Review ID
+	-	Question 1
+	-	Question 2
+	-	Question 3
+	-	Question 4
+	-	Question 5
+	-	Follow Up Needed (boolean)
+
+8.	Industry Mentor Evaluation (PK Industry Mentor Eval Number)
+	-	Industry Mentor Eval Number
+	-	Tasks Assigned to Student
+	-	Communication 1
+	-	Communication 2
+	-	Communication 3
+	-	Communication 4
+	-	Knowledge 1
+	-	Knowledge 2
+	-	Knowledge 3
+	-	Knowledge 4
+	-	Interpersonal 1
+	-	Interpersonal 2
+	-	Interpersonal 3
+	-	Interpersonal 4
+	-	Performance 1
+	-	Performance 2
+	-	Performance 3
+	-	Performance 4
+	-	 Areas of Strength
+	-	 Areas for Improvement
+	-	Comments
+	
+9.	Student Evaluation of Practicum (PK Student Practicum Eval Number)
+	-	Student Practicum Eval Number
+	-	Practicum Reason
+	-	Work Hours Completed
+	-	Site Rating (1-6)
+	-	Student Recommendation
+	-	Mentor Rating (1-4)
+	-	Mentor Likes
+	-	Mentor Dislikes
+	-	Faculty Rating (1-4)
+	-	Practicum Improvement
+	-	Practicum Rating 1
+	-	Practicum Rating 2
+	-	Practicum Rating 3
+	-	Practicum Rating 4
+	-	Practicum Maintenance
+	-	Feedback
