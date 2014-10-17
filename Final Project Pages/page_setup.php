@@ -14,20 +14,7 @@
 		echo"
 		<div id = 'menu_bar'>
 			PracSys
-		</div>
-		<!--Home Page-->
-		<div align = 'right'>
-		<form action='home.php'> 
-		<input type='submit' name='home' value='Home'> 
-		</form>
-		</div> 
-
-		<!--Logout code-->
-		<div align = 'right'>
-		<form action='logout.php'> 
-		<input type='submit' name='logout' value='Log-out'> 
-		</form>
-		</div> ";
+		</div>";
 		return $user; 
 	}
 	
