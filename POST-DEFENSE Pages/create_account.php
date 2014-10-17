@@ -17,14 +17,9 @@
 				$password = $_GET['password'];
 				$name = $_GET['name'];
 				$type = $_GET['type'];
-
 				$idnum = $_GET['idnum'];
-				$course = $_GET['course'];
-				
-				$company = $_GET['company'];
-				$dept = $_GET['department'];
-				$title = $_GET['title'];
-
+				$company = ''; 
+				if(isset($_GET['company'])) $company = $_GET['company'];
 				$valid_username_chars = array("a","b","c","d","e","f","g","h","i","j",
 					"k","l","m","n","o","p","q","r","s","t","u","v","w","x",
 					"y","z","0","1","2","3","4","5","6","7","8","9","_");
@@ -65,7 +60,7 @@
 					if($success) $inserted = true; 
 					if($type=="student")
 					{
-						
+						$course = $_GET['course'];
 						$insertStudent = "INSERT INTO Account_Student (Username, IDNumber, Course)
 						VALUES(\"$username\",\"$idnum\", \"$course\")";
 						if (!mysqli_query($conn,$insertStudent))
@@ -80,7 +75,9 @@
 						}
 					}elseif($type=="mentor")
 					{
-						 
+						
+						$dept = $_GET['department'];
+						$title = $_GET['title'];
 						$error = mysqli_error($conn); 
 						$insertMentor = "INSERT INTO Account_Mentor
 						VALUES(\"$username\",\"$company\",\"$title\",\"$dept\")";
